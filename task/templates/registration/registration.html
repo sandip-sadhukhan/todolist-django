@@ -1,0 +1,78 @@
+{% extends 'task/base.html' %}
+{% block title %}Registration - To Do App {% endblock %}
+{% block content %}
+<div class="row my-3">
+  <div class="col-md-6 m-auto">
+    
+    {% if form.errors %}
+    <p>There are errors in the form</p>
+    {% endif %}
+    <div class="card bg-danger text-light">
+      <div class="card-header">
+        <div class="card-title text-center">Registration Form</div>
+      </div>
+      <div class="card-body">
+        <form action="{% url 'register' %}" method="post">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Username</span>
+            </div>
+            {{ form.username }}
+          </div>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">First Name</span>
+            </div>
+            {{ form.first_name }}
+          </div>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Last Name</span>
+            </div>
+            {{ form.last_name }}
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Email</span>
+            </div>
+            {{ form.email }}
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Password</span>
+            </div>
+            {{ form.password1 }}
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Confirm Password</span>
+            </div>
+            {{ form.password2 }}
+          </div>
+          <input class="btn btn-primary mb-3" type="submit" value="SIGNUP">
+        </form>
+        <p>Don't have an Account? <a href="{% url 'login' %}"> Login Now!</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let input_form = document.querySelectorAll('input')
+  input_form[1].placeholder = "Enter username..."
+  input_form[1].className += 'form-control'
+  input_form[2].placeholder = "Enter first name..."
+  input_form[2].className += 'form-control' 
+  input_form[3].placeholder = "Enter last name..."
+  input_form[3].className += 'form-control' 
+  input_form[4].placeholder = "Enter email..."
+  input_form[4].className += 'form-control' 
+  input_form[5].placeholder = "Enter password..."
+  input_form[5].className += 'form-control' 
+  input_form[6].placeholder = "Enter confirm password..."
+  input_form[6].className += 'form-control' 
+</script>
+{% endblock %}

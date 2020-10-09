@@ -1,0 +1,57 @@
+{% extends 'task/base.html' %}
+{% block title %}To Do App{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="row">
+  <div class="col-md-6 m-auto">
+    <div class="card text-center bg-info my-4">
+      <div class="card-header text-white">
+        Your Tasks
+      </div>
+      <div class="card-body">
+        <form action="{% url 'add_task' %}" method="post">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i style="font-size:20px" class="fa text-info fa-tasks" aria-hidden="true"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Enter Your Task..." aria-label="taskname" aria-describedby="basic-addon1" name="task_name">
+          </div>
+          <input type="submit" class="btn btn-light mb-3" value="Add Task">
+        </form>
+        <ul class="list-group list-group-flush text-left">
+          {% for task in tasks %}
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between">
+              <div class="title">{{task.task_name}}</div>
+              <div class="options d-flex justify-content-between">
+                <div class="delete mx-2">
+                  <a href="{% url 'remove_task' task.id %}">
+                    <i style="font-size:22px" class="fa fa-trash text-danger" aria-hidden="true"></i></a>
+                </div>
+                <!-- <div class="edit mx-2">
+                <a href="#">
+                  <i style="font-size:20px" class="fa text-info fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+                </div> -->
+              </div>
+            </div>  
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="jumbotron text-center my-0">
+  <h1 class="display-4">To Do App</h1>
+  <p class="lead">This is a simple to do app with login functionality.</p>
+  <hr class="my-4">
+  <p>Please register or log in for save your task progress.</p>
+  <a class="btn btn-primary" href="{% url 'register'%}" role="button">Register</a>
+  <a class="btn btn-success" href="{% url 'login' %}" role="button">Login</a>
+</div>
+{% endif %}
+{% endblock %}

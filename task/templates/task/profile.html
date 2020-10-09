@@ -1,0 +1,22 @@
+{% extends 'task/base.html' %}
+{% block title %}Profile - To Do App{% endblock %}
+{% block content %}
+<div class="row my-3">
+    <div class="col-md-6 m-auto">
+        <div class="card bg-success text-light">
+            <div class="card-header">
+                <div class="card-title text-center">Your Profile</div>
+            </div>
+            <div class="card-body text-dark">
+                <ul class="list-group">
+                    <li class="list-group-item">Username : {{user.username}}</li>
+                    <li class="list-group-item">First Name : {{user.first_name}}</li>
+                    <li class="list-group-item">Last Name : {{user.last_name}}</li>
+                    <li class="list-group-item">Email : {{user.email}}</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
